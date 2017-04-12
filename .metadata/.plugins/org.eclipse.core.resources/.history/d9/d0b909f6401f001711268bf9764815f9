@@ -1,0 +1,9 @@
+package com.mygoogle.sample;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet(urlPatterns="/googlesearch")
+public class MyGoogleServlet extends HttpServlet{
+
+}

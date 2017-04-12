@@ -1,0 +1,92 @@
+package com.servlet.sample;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class HelloWorld
+ */
+@WebServlet("/hello")
+public class HelloWorld extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HelloWorld() {
+		super();
+		System.out.println("**** 1. New instance created");
+	}
+
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println("************** 2. init method called");
+		super.init(config);
+	}
+
+	
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("************** 3. service method called "+request.getMethod());
+		
+		super.service(request, response);
+	}
+
+	@Override
+	public void destroy() {
+		System.out.println("************** 999. destroy method called");
+		super.destroy();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("************** 4. do get method called");
+		response.setContentType("text/html");
+		PrintWriter printWriter = response.getWriter();
+				
+		String yesOrNoParam = request.getParameter("param");
+
+		if ("yes".equals(yesOrNoParam)) {
+			printWriter.write("<html><body>You said yes!</body></html>");
+		} else if ("no".equals(yesOrNoParam)) {
+			printWriter.write("<html><body>You said no!</body></html>");
+		} else {
+			printWriter.write("<html><body>You said something else "+yesOrNoParam+"!</body></html>");
+		}
+		
+		String testParamValue = request.getParameter("param2");
+		System.out.println(testParamValue);
+		
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("************** 5. do post method called");
+	}
+
+}

@@ -1,0 +1,105 @@
+package com.servlet.sample;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.servlet.post.data.Order;
+import com.servlet.post.data.dao.OrderDAO;
+
+/*
+ * 
+ CREATE TABLE [dbo].[Orders](
+ [ORDER_ID] [int] IDENTITY(1,1) NOT NULL,
+ [item_number] [int] NULL,
+ [quantity] [int] NULL,
+ [price] [decimal] (4,2) NULL,
+ [first_name] [varchar](50) NULL,
+ [last_name] [varchar](50) NULL,
+ [address] [varchar](250) NULL
+ )
+
+ */
+@WebServlet("/ProcessOrder")
+public class SaveData extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// read and populate the parameters
+		Order order = new Order();
+		order.setFirstName(request.getParameter("firstName"));
+		order.setLastName(request.getParameter("lastName"));
+		order.setAddress(request.getParameter("address"));
+		
+		order.setOrderNumber(String.valueOf(System.currentTimeMillis()));
+		
+		order.computeFullName();
+
+		// save the data
+		boolean result = saveOrders(order);
+		if (result == true) {
+			/*
+			PrintWriter out = response.getWriter();
+			// approach 1
+			out.println("<html><body>");
+			out.println("<h1>Than you for your Order has been Saved Successfully</h1>");
+			out.println("<br><h1>Details:<h1>");
+			out.println("<br>First Name: " + order.getFirstName());
+			out.println("<br>Last Name: " + order.getLastName());
+			out.println("<br>Address: " + order.getAddress());
+			out.println("<br>Order Id: " + order.getOrderNumber());
+			out.println("</body></html>");
+			
+			// approach 2
+			RequestDispatcher rd = request.getRequestDispatcher("/success.html");
+			rd.forward(request, response);
+			*/
+			// approach 3 - preferred
+			
+			request.setAttribute("orderReference", order);
+			RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
+			rd.forward(request, response);
+			
+		
+		} else {
+			response.getWriter()
+					.write("<h1>Error occurred, sorry we could not process the order</h1>");
+
+			// RequestDispatcher rd =
+			// request.getRequestDispatcher("/error.html");
+			// rd.forward(request, response);
+		}
+	}
+
+	private boolean saveOrders(Order order) {
+		// validate the data
+		if (order.getFirstName() == null
+				|| order.getFirstName().trim().length() == 0)
+			return false;
+
+		OrderDAO dao = new OrderDAO();
+
+		int numberOfRecordsInserted = dao.saveOrder(order);
+
+		System.out.println("Number of records inserted:"
+				+ numberOfRecordsInserted);
+		if (numberOfRecordsInserted == 1)
+			return true;
+		return false;
+	}
+
+}

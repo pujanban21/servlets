@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.pioneer.students.StudentsFromDatabase&apos; to &apos;Students&apos;&#x0D;&#x0A;- Original project: &apos;MyGoogle&apos;&#x0D;&#x0A;- Original element: &apos;com.pioneer.students.StudentsFromDatabase&apos;&#x0D;&#x0A;- Renamed element: &apos;com.pioneer.students.Students&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;StudentsFromDatabase&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.pioneer.students{StudentsFromDatabase.java[StudentsFromDatabase" matchStrategy="1" name="Students" qualified="false" references="true" similarDeclarations="false" stamp="1492020033632" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Simple Form</title>
+</head>
+<body>
+
+<!-- action  = servlet container method is the type of  HTTP request  -->
+	<form action="xmlservletpath" method="post">
+		<input name="userName" placeholder ="User Name" >
+		<input name="firstName"  placeholder="First Name"/> 
+		<input type="submit"  placeholder="Subimit Form"/>
+	</form>
+</body>
+</html>

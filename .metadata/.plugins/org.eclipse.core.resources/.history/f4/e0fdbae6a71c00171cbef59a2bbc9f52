@@ -1,0 +1,11 @@
+package com.pioneer.servlets;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet(description="defining servlet to a java class", urlPatterns={"servlet1", "servlet2"})
+public class ServletUsingAnnotation  extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+
+}

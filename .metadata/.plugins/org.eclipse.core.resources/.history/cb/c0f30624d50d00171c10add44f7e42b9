@@ -1,0 +1,48 @@
+package org.pioneer.service;
+
+import java.util.HashMap;
+
+import org.junit.Test;
+
+import com.pioneer.dto.MyClass;
+import com.pioneer.dto.User;
+
+// service for the authentication
+//checks if the password is there
+public class LoginServcie {
+
+	HashMap<String, String> users = new HashMap<String, String>();
+
+	public LoginServcie() {
+		users.put("johndoe", "John Doe");
+		users.put("janedoe", "Jane Doe");
+		users.put("jguru", "Java Guru");
+	}
+	
+	  @Test
+      public void multiplicationOfZeroIntegersShouldReturnZero() {
+		  LoginServcie tester = new LoginServcie(); // MyClass is tested
+
+              // assert statements
+              assertEquals("10 x 0 must be 0", 0, tester.getUserDetails("johndoe");
+              assertEquals("0 x 10 must be 0", 0, tester.multiply(0, 10));
+              assertEquals("0 x 0 must be 0", 0, tester.multiply(0, 0));
+      }
+	  
+
+	public User getUserDetails(String userId) {
+		User user = new User();
+		user.setUserName(users.get(userId));
+		user.setUserId(userId);
+		return user;
+	}
+
+	public boolean authenicate(String userId, String password) {
+		if (password != null && password.trim() != "") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}
