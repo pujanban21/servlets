@@ -32,7 +32,11 @@ public class Students extends HttpServlet {
 		if (info.addList().containsKey(firstName)) {
 			studentsInfo = new ArrayList<>();
 			studentsInfo.addAll(info.addList().get(firstName));
-			studentsInfo.stream().forEach(elem -> writer.println("<br>" + elem));
+			
+			studentsInfo.stream().forEach(elem->
+			writer.println("<br>" +elem)
+			);
+			
 		}
 	}
 
